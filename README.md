@@ -168,10 +168,11 @@ _SSH использует пару ключей для обеспечения б
 ssh-keygen -t ed25519 -C "электронная почта, к которой привязан аккаунт на GitHub"
 ```
 1. **ssh-keygen -t ed25519 -C "электронная почта, к которой привязан аккаунт на GitHub"** - Команда для генерации SSH-пары в консоли. Если выдаст ошибку, тогда система не поддерживает алгоритм шифрования ed25519, тогда используйте другой, ниже.
+2. **ssh-keygen -t rsa -b 4096 "электронная почта, к которой привязан аккаунт на GitHub"** - Команда для генерации SSH-пары. По rsa. После ввода должно быть такое сообщение: 
+_> Generating public/private rsa key pair._
 ```
 ssh-keygen -t rsa -b 4096 "электронная почта, к которой привязан аккаунт на GitHub"
 ```
-2. **ssh-keygen -t rsa -b 4096 "электронная почта, к которой привязан аккаунт на GitHub"** - Команда для генерации SSH-пары. По rsa. После ввода должно быть такое сообщение: > > Generating public/private rsa key pair.
 3. **Укажите место хранения ключей.** - _> Enter a file in which to save the key (C:\Users\<имя_пользователя>\.ssh\):(Press enter)_
 4. _> Enter passphrase (empty for no passphrase): (Type a passphrase)_ - Введите контрольную фразу.
 - _> Enter same passphrase again: (Type passphrase again)_ - Повторите фразу.
@@ -191,11 +192,11 @@ clip <~/.ssh/id_rsa.pub
 ```
 clip < ~/.ssh/id_ed25519.pub 
 ``` 
-+ Второй вариант вывести содержимое файла и вручную скопировать из консоли: 
++ Самый просто вариант для rsa вывести содержимое файла и вручную скопировать из консоли: 
 ``` 
 cat ~/.ssh/id_rsa.pub 
 ``` 
-+ или для ed25519, вывод в консоль содержимого файла (для копирования):
++ Самый просто вариант для ed25519, вывод в консоль содержимого файла (для копирования):
 ``` 
 cat ~/.ssh/id_ed25519.pub
 ```
@@ -217,9 +218,12 @@ pbcopy < ~/.ssh/id_ed25519.pub
 6. В поле **Key type** (англ. «тип ключа») должно быть **Authentication Key** (англ. «ключ аутентификации»).
 7. В поле **Key** скопируйте ваш ключ из буфера обмена.
 8. Нажмите на кнопку **Add SSH key** (англ. «добавить SSH-ключ»).
-9. Проверьте правильность ключа с помощью следующей команды: <br> ``` **ssh -T git@github.com** ``` .
+9. Проверьте правильность ключа с помощью следующей команды: 
+``` 
+ssh -T git@github.com
+```
 
-_Если это первый раз, когда вы используете Git, чтобы поделиться проектом на GitHub, появится похожее предупреждение_: <br>The authenticity of host 'github.com (140.82.121.4)' can't be established. ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU. This key is not known by any other names. Are you sure you want to continue connecting (yes/no/[fingerprint])?
+**Если это первый раз, когда вы используете Git**, чтобы поделиться проектом на GitHub, появится похожее предупреждение: <br>The authenticity of host 'github.com (140.82.121.4)' can't be established. ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU. This key is not known by any other names. Are you sure you want to continue connecting (yes/no/[fingerprint])?
 
 **Это предупреждение сообщает, что вы никогда не соединялись с сервером GitHub**. Поэтому Git не может гарантировать, что сервер является тем, за кого он себя выдаёт.
 
